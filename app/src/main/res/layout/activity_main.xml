@@ -45,40 +45,13 @@
         />
 
     <Button
-        android:id="@+id/btnGetNGNStatus"
+        android:id="@+id/btnGetLastRegisterState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="get NGN.Status"
-        app:layout_constraintRight_toLeftOf="@id/btnGetNGNId"
-        android:layout_marginRight="16dp"
+        android:text="get last registered state"
         app:layout_constraintTop_toBottomOf="@id/btnUnbind"
-        />
-    <Button
-        android:id="@+id/btnGetNGNId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="get NGN.Id"
-        app:layout_constraintRight_toRightOf="@id/wrnGuidelineVertical"
-        android:layout_marginRight="8dp"
-        app:layout_constraintTop_toBottomOf="@id/btnUnbind"
-        />
-    <Button
-        android:id="@+id/btnGetNGNError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="get NGN.Error"
-        app:layout_constraintLeft_toRightOf="@id/wrnGuidelineVertical"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintTop_toBottomOf="@id/btnUnbind"
-        />
-    <Button
-        android:id="@+id/btnGetNGNLastUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="get NGN.LastUpdate"
-        app:layout_constraintLeft_toRightOf="@id/btnGetNGNError"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintTop_toBottomOf="@id/btnUnbind"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         />
 
     <Button
@@ -88,7 +61,7 @@
         android:text="get Calls (trace callState to logcat)"
         app:layout_constraintRight_toRightOf="@id/wrnGuidelineVertical"
         android:layout_marginRight="8dp"
-        app:layout_constraintTop_toBottomOf="@id/btnGetNGNLastUpdate"
+        app:layout_constraintTop_toBottomOf="@id/btnGetLastRegisterState"
         />
 
     <Button
@@ -98,7 +71,7 @@
         android:text="stop get Calls"
         app:layout_constraintLeft_toRightOf="@id/wrnGuidelineVertical"
         android:layout_marginLeft="8dp"
-        app:layout_constraintTop_toBottomOf="@id/btnGetNGNLastUpdate"
+        app:layout_constraintTop_toTopOf="@id/btnGetCalls"
         />
 
     <TextView

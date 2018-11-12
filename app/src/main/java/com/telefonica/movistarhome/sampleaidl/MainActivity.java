@@ -15,15 +15,16 @@ import android.widget.TextView;
 
 import com.telefonica.movistarhome.comms.ICommsTRService;
 import com.telefonica.movistarhome.comms.service.CommsCall;
+import com.telefonica.movistarhome.comms.service.CommsLastRegisterState;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnGetNGNStatus;
-    private Button btnGetNGNId;
-    private Button btnGetNGNError;
-    private Button btnGetNGNLastUpdate;
+    private Button btnGetLastRegisterState;
     private Button btnBind;
     private Button btnUnbind;
     private Button btnGetCalls;
@@ -56,10 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void initView() {
-        btnGetNGNStatus = findViewById(R.id.btnGetNGNStatus);
-        btnGetNGNId = findViewById(R.id.btnGetNGNId);
-        btnGetNGNError = findViewById(R.id.btnGetNGNError);
-        btnGetNGNLastUpdate = findViewById(R.id.btnGetNGNLastUpdate);
+        btnGetLastRegisterState = findViewById(R.id.btnGetLastRegisterState);
         btnBind = findViewById(R.id.btnBind);
         btnUnbind = findViewById(R.id.btnUnbind);
         btnGetCalls = findViewById(R.id.btnGetCalls);
@@ -71,10 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void setListeners() {
-        btnGetNGNStatus.setOnClickListener(view -> getNGNStatus());
-        btnGetNGNId.setOnClickListener(view -> getNGNId());
-        btnGetNGNError.setOnClickListener(view -> getNGNError());
-        btnGetNGNLastUpdate.setOnClickListener(view -> getNGNLastUpdate());
+        btnGetLastRegisterState.setOnClickListener(view -> getLastRegisterState());
         btnGetCalls.setOnClickListener(view -> getCalls());
         btnStopGetCalls.setOnClickListener(view -> stopGetCalls());
         btnBind.setOnClickListener(view -> bind());
@@ -135,59 +130,39 @@ public class MainActivity extends AppCompatActivity {
         btnStopGetCalls.setEnabled(false);
     }
 
-    private void getNGNStatus() {
-        String response = sendRequest("NGN.Status");
-        txtViewResult.setText("RESPONSE:" + response);
-    }
-
-    private void getNGNId() {
-        String response = sendRequest("NGN.Id");
-        txtViewResult.setText("RESPONSE:" + response);
-    }
-
-    private void getNGNLastUpdate() {
-        String response = sendRequest("NGN.LastUpdate");
-        txtViewResult.setText("RESPONSE:" + response);
-    }
-
-    private void getNGNError() {
-        String response = sendRequest("NGN.Error");
-        txtViewResult.setText("RESPONSE:" + response);
-    }
-
-    protected String sendRequest(String param) {
-        String response = "";
+    private void getLastRegisterState() {
         if (service != null) {
             try {
-                response = service.getParameterValues(param);
+                CommsLastRegisterState commsLastRegisterState = service.getLastRegisterState();
+                txtViewResult.setText("RESPONSE --> ID:" + commsLastRegisterState.getId() + ", Status:" +
+                        commsLastRegisterState.getStatus() + ", Error:" + commsLastRegisterState.getError() +
+                        ", Timestamp:" + dateInMillisecondsToString(commsLastRegisterState.getLastUpdate()));
             } catch (RemoteException e) {
-                Log.d(this.getClass().getSimpleName(), "sendRequest [param:" + param +
-                        "] error. " + e.getMessage());
-                response = e.getMessage();
+                Log.d(this.getClass().getSimpleName(), "getLastRegisterState error: " + e.getMessage());
+                txtViewResult.setText("RESPONSE --> error:" + e.getMessage());
             }
         }
-        return response;
     }
 
     protected void setButtonsState(boolean isBinding) {
         if (isBinding) {
-            btnGetNGNStatus.setEnabled(true);
-            btnGetNGNId.setEnabled(true);
-            btnGetNGNError.setEnabled(true);
-            btnGetNGNLastUpdate.setEnabled(true);
+            btnGetLastRegisterState.setEnabled(true);
             btnBind.setEnabled(false);
             btnUnbind.setEnabled(true);
             btnGetCalls.setEnabled(true);
             btnStopGetCalls.setEnabled(false);
         } else {
-            btnGetNGNStatus.setEnabled(false);
-            btnGetNGNId.setEnabled(false);
-            btnGetNGNError.setEnabled(false);
-            btnGetNGNLastUpdate.setEnabled(false);
+            btnGetLastRegisterState.setEnabled(false);
             btnGetCalls.setEnabled(false);
             btnBind.setEnabled(true);
             btnUnbind.setEnabled(false);
             btnStopGetCalls.setEnabled(false);
         }
+    }
+
+    public String dateInMillisecondsToString(long dateInMilliseconds) {
+        SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ",
+                new Locale("es", "ES"));
+        return dateFormat.format(new Date(dateInMilliseconds));
     }
 }

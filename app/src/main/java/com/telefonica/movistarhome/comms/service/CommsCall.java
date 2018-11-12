@@ -31,21 +31,27 @@ public class CommsCall implements Parcelable {
     public int getState() {
         return state;
     }
+
     public String getStateText() {
         return stateText;
     }
+
     public String getLocal() {
         return local;
     }
-    public String getRemote(){
+
+    public String getRemote() {
         return remote;
     }
+
     public boolean isIncoming() {
         return this.isIncoming;
     }
+
     public int getConnectedTime() {
         return this.connectedTime;
     }
+
     public int getTotalTime() {
         return this.totalTime;
     }
@@ -53,25 +59,30 @@ public class CommsCall implements Parcelable {
     public void setState(int state) {
         this.state = state;
     }
+
     public void setStateText(String stateText) {
         this.stateText = stateText;
     }
+
     public void setLocal(String local) {
         this.local = local;
     }
+
     public void setRemote(String remote) {
         this.remote = remote;
     }
+
     public void setIsIncoming(boolean isIncoming) {
         this.isIncoming = isIncoming;
     }
+
     public void setConnectedTime(int connectedTime) {
         this.connectedTime = connectedTime;
     }
+
     public void setTotalTime(int totalTime) {
         this.totalTime = totalTime;
     }
-
 
     @Override
     public int describeContents() {

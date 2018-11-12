@@ -1,3 +1,3 @@
 package com.telefonica.movistarhome.comms.service;
 
-parcelable CommsCall;
+parcelable CommsLastRegisterState;
