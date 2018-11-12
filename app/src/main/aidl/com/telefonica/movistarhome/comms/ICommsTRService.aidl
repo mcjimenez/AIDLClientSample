@@ -1,9 +1,9 @@
 // ICommsTRService.aidl
 package com.telefonica.movistarhome.comms;
 
-import com.telefonica.movistarhome.comms.service.CommsTRCall;
+import com.telefonica.movistarhome.comms.service.CommsCall;
 
 interface ICommsTRService {
     String getParameterValues(String paramName);
-    List<CommsTRCall> getCallState();
+    List<CommsCall> getCallState();
 }

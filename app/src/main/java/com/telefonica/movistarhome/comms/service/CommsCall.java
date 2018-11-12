@@ -3,7 +3,7 @@ package com.telefonica.movistarhome.comms.service;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class CommsTRCall implements Parcelable {
+public class CommsCall implements Parcelable {
     private int state;
     private String stateText;
     private String local;
@@ -12,7 +12,7 @@ public class CommsTRCall implements Parcelable {
     private int connectedTime;
     private int totalTime;
 
-    public CommsTRCall(int state,
+    public CommsCall(int state,
                        String stateText,
                        String local,
                        String remote,
@@ -89,10 +89,10 @@ public class CommsTRCall implements Parcelable {
         parcel.writeInt(totalTime);
     }
 
-    public static final Parcelable.Creator<CommsTRCall> CREATOR = new Parcelable.Creator<CommsTRCall>() {
+    public static final Parcelable.Creator<CommsCall> CREATOR = new Parcelable.Creator<CommsCall>() {
         @Override
-        public CommsTRCall createFromParcel(Parcel source) {
-            return new CommsTRCall(source.readInt(),
+        public CommsCall createFromParcel(Parcel source) {
+            return new CommsCall(source.readInt(),
                     source.readString(),
                     source.readString(),
                     source.readString(),
@@ -102,8 +102,8 @@ public class CommsTRCall implements Parcelable {
         }
 
         @Override
-        public CommsTRCall[] newArray(int size) {
-            return new CommsTRCall[size];
+        public CommsCall[] newArray(int size) {
+            return new CommsCall[size];
         }
     };
 }

@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.telefonica.movistarhome.comms.ICommsTRService;
-import com.telefonica.movistarhome.comms.service.CommsTRCall;
+import com.telefonica.movistarhome.comms.service.CommsCall;
 
 import java.util.List;
 
@@ -99,16 +99,16 @@ public class MainActivity extends AppCompatActivity {
         checkCalls = () -> {
             if (service != null) {
                 try {
-                    List<CommsTRCall> callList = service.getCallState();
+                    List<CommsCall> callList = service.getCallState();
                     String response = "";
-                    for (CommsTRCall commsTRCall: callList) {
-                        String result = "State: " + commsTRCall.getState() +
-                                ", StateText: " + commsTRCall.getStateText() +
-                                ", local: " + commsTRCall.getLocal() +
-                                ", remote: " + commsTRCall.getRemote() +
-                                ", isIncomingCall: " + commsTRCall.isIncoming() +
-                                ", connectedTime: " + commsTRCall.getConnectedTime() +
-                                ", totalTime: " + commsTRCall.getTotalTime();
+                    for (CommsCall commsCall: callList) {
+                        String result = "State: " + commsCall.getState() +
+                                ", StateText: " + commsCall.getStateText() +
+                                ", local: " + commsCall.getLocal() +
+                                ", remote: " + commsCall.getRemote() +
+                                ", isIncomingCall: " + commsCall.isIncoming() +
+                                ", connectedTime: " + commsCall.getConnectedTime() +
+                                ", totalTime: " + commsCall.getTotalTime();
                         response += "\r\n" + result;
                     }
                     txtViewResult.setText(response);
